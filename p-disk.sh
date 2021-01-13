@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#if [[ $EUID -ne 0 ]]; then
-   #echo "This script must be run as root" 
-   #exit 1
-#fi
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 
+   exit 1
+fi
 
 echo "exexuting du -h /"
 du -h / &>> p1_n1_du_h.txt
@@ -48,3 +48,20 @@ df -h --output=source,fstype,size,used,avail,pcent,target -x tmpfs -x devtmpfs &
 
 echo "disk use true info"
 df -h | grep ^/dev &>> p1_n2_df_h_grep.txt
+
+echo "fdisk see partition"
+fdisk -l /dev/sda &>> p2_n1_fdisk_l.txt
+
+echo "sfdisk see partition"
+sfdisk -l /dev/sda &>> p2_n2_sfdisk_l.txt
+
+echo "cfdisk see partition"
+echo "fail, do manually"
+
+echo "parted see partition"
+parted -l /dev/sda &>> p2_n4_parted_l.txt
+
+echo "lsbsk"
+lsblk &>> p2_n5_lsblk.txt
+lsblk -a &>> p2_n5_lsblk_a.txt
+lsblk -b &>> p2_n5_lsblk_b.txt
