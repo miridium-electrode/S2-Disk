@@ -65,3 +65,26 @@ echo "lsbsk"
 lsblk &>> p2_n5_lsblk.txt
 lsblk -a &>> p2_n5_lsblk_a.txt
 lsblk -b &>> p2_n5_lsblk_b.txt
+lsblk -m &>> p2_n5_lsblk_m.txt
+
+echo "check partition attribute"
+blkid &>> p2_n6_blkid.txt
+
+echo "hwinfo"
+hwinfo --block --short &>> p2_n7_hwinfo_block_short.txt
+hwinfo --block &>> p2_n7_hwinfo_block.txt
+
+echo "cek partisi disk"
+fdisk -l &>> p3_n3_fdisk_l.txt
+
+echo "if filesystem mounted?"
+df -k &>> p3_n10_df_k.txt
+
+echo "if filesystem mounted?"
+df -k &>> p3_n13_df_k.txt
+
+echo "filesystem check"
+df -hT | awk '{print $1,$2,$NF}' | grep "^/dev" &>> p4_n1_filecheck.txt
+
+echo "is ext4?"
+df -T &>> p4_n7_df_T.txt
